@@ -28,4 +28,41 @@ function promiseUseCase() {
   });
 }
 
+// Promise execution in parellel
+// Promise.all([promise1, promise2, promise3])
+//   .then((values) => {
+//     console.log(values);
+//   })
+//   .catch((error) => {
+//     console.log("Error:", error);
+//   });
+
+// Promise execution in sequence
+// promise1
+//   .then((val) => {
+//     console.log(val);
+//     return promise2;
+//   })
+//   .then((val) => {
+//     console.log(val);
+//     return promise3;
+//   })
+//   .catch((error) => {
+//     console.log("Error:", error);
+//   });
+
+// Promise execution in serial
+// promise1
+//   .then((val) => {
+//     console.log(val);
+//     return promise2;
+//   })
+//   .then((val) => {
+//     console.log(val);
+//     return promise3;
+//   })
+//   .catch((error) => {
+//     console.log("Error:", error);
+//   });
+
 export default promiseUseCase;

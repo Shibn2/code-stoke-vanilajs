@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="jsRoot2">
+      <div id="app1">
+        <h3>HTML5 Custom elements</h3>
+        <div>
+          <custom-button><span>Click me</span></custom-button>
+          <template id="custom-button">
+            <style>
+              button {
+                background-color: #4caf50;
+                border: none;
+                color: white;
+                padding: 15px 32px;
+                text-align: center;
+                text-decoration: none;
+                display: inline-block;
+                font-size: 16px;
+                margin: 4px 2px;
+                cursor: pointer;
+              }
+            </style>
+            <button>
+              <slot>Default</slot>
+            </button>
+          </template>
+          <script>
+            class CustomButton extends HTMLElement {
+              constructor() {
+                super();
+                this.attachShadow({ mode: "open" });
+                const customBtn =
+                  document.getElementById("custom-button").content;
+                this.shadowRoot.appendChild(customBtn.cloneNode(true));
+              }
+            }
+            customElements.define("custom-button", CustomButton);
+          </script>
+        </div>
+      </div>
+      <div id="app2">
+        <div class="parent">
+          <div class="child1">
+            <button class="child1">Click me 1 btn</button>
+            <button class="child12">Click me 12 btn</button>
+            <div class="child2">
+              <button class="child2">Click me3</button>
+            </div>
+          </div>
+        </div>
+        <style>
+          .parent {
+            background-color: #f4f4f4;
+            padding: 20px;
+          }
+          .child1 {
+            background-color: #f9f9f9;
+            padding: 10px;
+          }
+          .child2 {
+            background-color: #f4f4f4;
+            padding: 10px;
+          }
+          .child3 {
+            background-color: #f9f9f9;
+            padding: 10px;
+          }
+        </style>
+      </div>
+    </div>
+  </body>
+</html>

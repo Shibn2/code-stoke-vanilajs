@@ -8,8 +8,29 @@ import {
 } from "./Modules/useCases/curry-function.js";
 import reducePolifillExample from "./Modules/polifills/reduce.js";
 import promiseV2Utility from "./Modules/polifills/promise.js";
+import { throttle } from "./Modules/useCases/throttle.js";
+import {
+  debounceWithImmediete,
+  debounce,
+} from "./Modules/useCases/debounce.js";
+import bindSample from "./Modules/polifills/bind.js";
+import callSample from "./Modules/polifills/call.js";
+import composePipeSample from "./Modules/useCases/compose-pipe.js";
+import {
+  round1ArrowFn,
+  round1Function,
+  round1IIFE,
+  round1IIFE2,
+  round1Promise,
+  round1SetTimeout,
+  round1This,
+  round1Var,
+} from "./Modules/roundOne/file1.js";
+import { typesExample } from "./Modules/useCases/types.js";
+import { puzzles } from "./Modules/useCases/puzzles.js";
 
 const moduleList = [
+  "Use case / general concepts",
   generatorFunWrapper,
   promiseUseCase,
   prototypeInheritance,
@@ -18,15 +39,63 @@ const moduleList = [
   curryExampleWithNParams,
   reducePolifillExample,
   promiseV2Utility,
+  bindSample,
+  callSample,
+  composePipeSample,
+  "First round problem list",
+  round1Var,
+  round1SetTimeout,
+  round1This,
+  round1Promise,
+  round1Function,
+  round1IIFE2,
+  round1IIFE,
+  round1ArrowFn,
+  typesExample,
+  puzzles,
+
+  // throttle,
+  // debaounceWithImmediete,
+  // debaounce,
 ];
 
 console.log("Hello World!");
 document.getElementById("jsRoot").innerHTML = "Js is running!";
 moduleList.forEach((module) => {
-  const button = document.createElement("button");
-  button.style.display = "block";
-  button.style.margin = "10px";
-  button.textContent = module.name;
-  button.onclick = module;
-  document.body.appendChild(button);
+  if (typeof module === "function") {
+    const button = document.createElement("button");
+    button.style.display = "block";
+    button.style.margin = "10px";
+    button.textContent = module.name;
+    button.onclick = module;
+    document.body.appendChild(button);
+  } else if (typeof module === "string") {
+    const seperatorAndTitle = document.createElement("h3");
+    seperatorAndTitle.textContent = module;
+    seperatorAndTitle.style.margin = "10px";
+    seperatorAndTitle.style.color = "red";
+    document.body.appendChild(seperatorAndTitle);
+  }
 });
+
+const seperatorAndTitle = document.createElement("h3");
+seperatorAndTitle.textContent = "Debounce and throttle";
+seperatorAndTitle.style.margin = "10px";
+seperatorAndTitle.style.color = "red";
+document.body.appendChild(seperatorAndTitle);
+const button = document.createElement("button");
+button.style.display = "block";
+button.style.margin = "10px";
+button.textContent = "Debounce";
+button.onclick = debounce(() => console.log("debounce clicked!!!"), 1000);
+document.body.appendChild(button);
+
+const buttonThrottle = document.createElement("button");
+buttonThrottle.style.display = "block";
+buttonThrottle.style.margin = "10px";
+buttonThrottle.textContent = "Throttle";
+buttonThrottle.onclick = throttle(
+  () => console.log("throttle clicked!!!"),
+  3000
+);
+document.body.appendChild(buttonThrottle);
