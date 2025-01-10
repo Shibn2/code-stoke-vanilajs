@@ -7,7 +7,10 @@ import {
   curryExampleWithNParams,
 } from "./Modules/useCases/curry-function.js";
 import reducePolifillExample from "./Modules/polifills/reduce.js";
-import promiseV2Utility from "./Modules/polifills/promise.js";
+import {
+  promiseV2Utility,
+  promiseV3Utility,
+} from "./Modules/polifills/promise.js";
 import { throttle } from "./Modules/useCases/throttle.js";
 import {
   debounceWithImmediete,
@@ -28,6 +31,14 @@ import {
 } from "./Modules/roundOne/file1.js";
 import { typesExample } from "./Modules/useCases/types.js";
 import { puzzles } from "./Modules/useCases/puzzles.js";
+import { objectCreateExample } from "./Modules/useCases/prototype-inheritance2.js";
+import memoizeUtility from "./Modules/polifills/memoise.js";
+import {
+  roundOne2Utility,
+  round1UtilityFile2,
+} from "./Modules/roundOne/file2.js";
+import promiseUtility from "./Modules/useCases/Promise-playground.js";
+import deepCloneUtility from "./Modules/useCases/deep-clone.js";
 
 const moduleList = [
   "Use case / general concepts",
@@ -39,6 +50,7 @@ const moduleList = [
   curryExampleWithNParams,
   reducePolifillExample,
   promiseV2Utility,
+  promiseV3Utility,
   bindSample,
   callSample,
   composePipeSample,
@@ -53,7 +65,12 @@ const moduleList = [
   round1ArrowFn,
   typesExample,
   puzzles,
-
+  objectCreateExample,
+  memoizeUtility,
+  roundOne2Utility,
+  round1UtilityFile2,
+  promiseUtility,
+  deepCloneUtility,
   // throttle,
   // debaounceWithImmediete,
   // debaounce,

@@ -74,4 +74,41 @@ function protoTypeClassExample() {
   p1.displayDetails();
 }
 
-export { prototypeFunctionExample, protoTypeClassExample };
+function objectCreateExample() {
+  // With syntactic constructs.
+  var objectOne = {
+    a: 1,
+  };
+
+  var arrayOne = [1, 2, 3, 4];
+
+  // Function prototype
+  var fn2 = function () {
+    console.log("f2");
+  };
+
+  console.log("functionOne", fn2);
+  console.log("ObjectOne", objectOne);
+  console.log("ArrayOne", arrayOne);
+
+  // With a constructor
+  function Graph() {
+    this.vertices = [];
+    this.edges = [];
+  }
+
+  var g = new Graph();
+  console.log("Graph", g);
+
+  // With Object.create
+  var objectOg = {
+    a: 1,
+  };
+  var object1 = Object.create(objectOg);
+  console.log("Object1", object1);
+
+  var objectD = Object.create(null);
+  console.log("ObjectD", objectD);
+}
+
+export { prototypeFunctionExample, protoTypeClassExample, objectCreateExample };

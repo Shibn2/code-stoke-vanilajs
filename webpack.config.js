@@ -6,6 +6,7 @@ module.exports = {
     app: path.resolve(__dirname, "index.js"),
     app2: path.resolve(__dirname, "index2.js"),
     app3: path.resolve(__dirname, "index3.js"),
+    app4: path.resolve(__dirname, "index4.js"),
   },
   output: {
     path: path.resolve(__dirname, "dist"),
@@ -50,6 +51,11 @@ module.exports = {
       template: path.resolve(__dirname, "public/index3.html"),
       filename: "index3.html",
       chunks: ["app3"],
+    }),
+    new HtmlWebpackPlugin({
+      template: path.resolve(__dirname, "public/index4.html"),
+      filename: "index4.html",
+      chunks: ["app4"],
     }),
   ],
 };

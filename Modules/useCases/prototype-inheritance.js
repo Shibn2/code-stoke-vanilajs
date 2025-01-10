@@ -9,8 +9,10 @@ function prototypeInheritance() {
   };
 
   console.log("Person log", Person);
-  console.dir("Person dir", Person);
+  console.dir(Person);
+  const p1 = new Person("Shibin");
 
+  console.dir(p1);
   function Employee(name, title) {
     Person.call(this, name);
     this.title = title;
