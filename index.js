@@ -1,6 +1,10 @@
 import promiseUseCase from "./Modules/UseCases/Promise-sample.js";
 import generatorFunWrapper from "./Modules/UseCases/genarator-function.js";
-import prototypeInheritance from "./Modules/UseCases/prototype-inheritance.js";
+import prototypeInheritance, {
+  jsOOPStudyExample1,
+  jsOOPStudyExample2,
+  piPractice,
+} from "./Modules/UseCases/prototype-inheritance.js";
 import { proxyPatternSample } from "./Modules/csFundamentals/designPatterns/proxyPattern.js";
 import {
   curryExampleWith2Params,
@@ -30,8 +34,12 @@ import {
   round1Var,
 } from "./Modules/roundOne/file1.js";
 import { typesExample } from "./Modules/useCases/types.js";
-import { puzzles } from "./Modules/useCases/puzzles.js";
-import { objectCreateExample } from "./Modules/useCases/prototype-inheritance2.js";
+import { puzzles, puzzleUtil } from "./Modules/useCases/puzzles.js";
+import {
+  objectCreateExample,
+  protoTypeClassExample,
+  prototypeFunctionExample,
+} from "./Modules/useCases/prototype-inheritance2.js";
 import memoizeUtility from "./Modules/polifills/memoise.js";
 import {
   roundOne2Utility,
@@ -39,12 +47,25 @@ import {
 } from "./Modules/roundOne/file2.js";
 import promiseUtility from "./Modules/useCases/Promise-playground.js";
 import deepCloneUtility from "./Modules/useCases/deep-clone.js";
+import {
+  mergeSortHandler,
+  quickSortByMedianPivotHandler,
+  quickSortHandler,
+} from "./Modules/csFundamentals/sort/sort.js";
+import { VariablesStudy } from "./Modules/roundOne/file3.js";
+import sleepUtil from "./Modules/useCases/sleep.js";
 
 const moduleList = [
   "Use case / general concepts",
   generatorFunWrapper,
   promiseUseCase,
   prototypeInheritance,
+  prototypeFunctionExample,
+  protoTypeClassExample,
+  objectCreateExample,
+  jsOOPStudyExample1,
+  jsOOPStudyExample2,
+  piPractice,
   proxyPatternSample,
   curryExampleWith2Params,
   curryExampleWithNParams,
@@ -65,15 +86,21 @@ const moduleList = [
   round1ArrowFn,
   typesExample,
   puzzles,
-  objectCreateExample,
   memoizeUtility,
   roundOne2Utility,
   round1UtilityFile2,
   promiseUtility,
   deepCloneUtility,
+  VariablesStudy,
+  sleepUtil,
+  puzzleUtil,
   // throttle,
   // debaounceWithImmediete,
   // debaounce,
+  "Sorting problems",
+  quickSortHandler,
+  quickSortByMedianPivotHandler,
+  mergeSortHandler,
 ];
 
 console.log("Hello World!");

@@ -10,21 +10,21 @@ function promiseUseCase() {
 
   Promise.all([promise1, promise2, promise3])
     .then((values) => {
-      console.log(values);
+      console.log("Promise wait for all to reject", values);
     })
     .catch((error) => {
-      console.log("Error:", error);
+      console.log("Error: on any reject", error);
     });
   Promise.allSettled([promise1, promise2, promise3]).then((values) => {
-    console.log(values);
+    console.log("AllSettled regardless of resolve or reject", values);
   });
 
   Promise.any([promise1, promise2, promise3]).then((val) => {
-    console.log("Promise.any resolved", val);
+    console.log("Promise any: resolved", val);
   });
 
   Promise.race([promise1, promise2, promise3]).then((val) => {
-    console.log("Promise.race", val);
+    console.log("Promise race: any one resolve or reject", val);
   });
 }
 

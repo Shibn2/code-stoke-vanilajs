@@ -21,7 +21,7 @@ function round1SetTimeout() {
   for (let i = 0; i < 5; i++) {
     console.log("Let block");
     setTimeout(() => {
-      console.log(i); // 0, 1, 2, 3, 4
+      console.log("1)", i);
     }, 1000);
   }
 
@@ -29,7 +29,7 @@ function round1SetTimeout() {
   for (var i = 0; i < arr.length; i++) {
     console.log("Var block");
     setTimeout(() => {
-      console.log("index", i, "el", arr[i]); // 0, 1, 2, 3, 4
+      console.log("index", i, "el", arr[i]);
     }, 1000);
   }
 
@@ -45,7 +45,9 @@ var status = "w";
 
 function round1This() {
   var status = "x";
-
+  function innerFn() {
+    console.log("4", this.status);
+  }
   setTimeout(() => {
     console.log(this.status);
     const context2 = {
@@ -57,19 +59,25 @@ function round1This() {
     const context3 = {
       status: "z",
     };
-    context2.getStatus(); // y
-    context2.getStatus.call(context3); // z
-    context2.getStatus.call(this); // x
+    //1
+    context2.getStatus();
+    //2
+    context2.getStatus.call(context3);
+    //3
+    context2.getStatus.call(this);
   }, 0);
+  console.log("2", this.status);
+  console.log("3", status);
+  innerFn();
 }
 
 function round1Promise() {
   const firstPromise = new Promise((res, rej) => {
-    setTimeout(res, 1000, "First Promise resolved");
+    setTimeout(res, 1000, "First Promise resolved-");
   });
 
   const secPromise = new Promise((res, rej) => {
-    setTimeout(rej, 2000, "Second Promise rejected");
+    setTimeout(rej, 2000, "Second Promise rejected-");
   });
   Promise.race([firstPromise, secPromise])
     .then((res) => console.log(res))
@@ -102,8 +110,9 @@ function round1IIFE2() {
   variable_2 = 5;
   (() => {
     variable_3 = 25;
-    console.log("variable_3", variable_3);
+    console.log("1)variable_3", variable_3);
     var variable_3 = 10;
+    onsole.log("2)variable_3", variable_3);
     variable_5 = 15;
     console.log("variable_2", variable_2);
   })();

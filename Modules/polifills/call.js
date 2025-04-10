@@ -1,21 +1,37 @@
-if (!Function.prototype.callv2) {
-  Function.prototype.callv2 = function (context) {
-    const expectedContext = context || global;
-    const fn = this;
-    const key = Symbol();
-    expectedContext[key] = fn;
+// if (!Function.prototype.callv2) {
+//   Function.prototype.callv2 = function (context) {
+//     const expectedContext = context || global;
+//     const fn = this;
+//     const key = Symbol();
+//     expectedContext[key] = fn;
 
-    const args = [];
+//     const args = [];
+//     for (let i = 1; i < arguments.length; i++) {
+//       args.push(arguments[i]);
+//     }
+
+//     const result = expectedContext[key](...args);
+//     delete expectedContext[key];
+//     return result;
+//   };
+// }
+
+if (!Function.prototype.callV3) {
+  Function.prototype.callV3 = function () {
+    const callback = this;
+    const context = arguments[0];
+    const key = Symbol();
+    context[key] = callback;
+
+    let args = [];
     for (let i = 1; i < arguments.length; i++) {
       args.push(arguments[i]);
     }
-
-    const result = expectedContext[key](...args);
-    delete expectedContext[key];
+    const result = context[key](...args);
+    delete context[key];
     return result;
   };
 }
-
 function callSample() {
   const person = {
     name: "John",
@@ -27,12 +43,12 @@ function callSample() {
   };
 
   function printName(author, attempt) {
-    console.log("this", this);
+    console.log("Name", this.name);
     console.log("printName method by", author, "in his", attempt, "attempt");
   }
 
-  printName.callv2(person, "shibin", "first"); // printName method John
-  printName.callv2(person2); // printName method Shibin
+  printName.callV3(person, "shibin", "first"); // printName method John
+  printName.callV3(person2); // printName method Shibin
 }
 
 export default callSample;

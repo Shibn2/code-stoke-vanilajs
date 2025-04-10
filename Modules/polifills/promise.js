@@ -37,83 +37,152 @@ class PromiseV2 {
   }
 }
 
-class PromiseV3 {
-  constructor(executor) {
-    this.value;
-    this.rejectReason;
-    this.onResolve;
-    this.onReject;
+// class PromiseV3 {
+//   constructor(executor) {
+//     this.value;
+//     this.rejectReason;
+//     this.onResolve;
+//     this.onReject;
+//     this.state = "pending";
+//     this.called = false;
+//     this.resolve = this.resolve.bind(this);
+//     this.reject = this.reject.bind(this);
+//     try {
+//       console.log("constructor hit");
+//       executor(this.resolve, this.reject);
+//     } catch (err) {
+//       console.log("Error from constructor", err);
+//     }
+//   }
+//   resolve(value) {
+//     console.log("on resolve fn onResolve", this.onResolve);
+//     if (this.state !== "pending") return;
+//     this.value = value;
+//     this.state = "fullfilled";
+//     if (typeof this.onResolve === "function" && !this.called) {
+//       this.onResolve(this.value);
+//       this.called = true;
+//     }
+//   }
+//   reject(value) {
+//     if (this.state !== "pending") return;
+//     this.value = value;
+//     this.state = "rejected";
+//     if (!this.called && typeof this.onReject === "function") {
+//       this.onReject(this.value);
+//       this.called = true;
+//     }
+//   }
+//   then(onFullfilled) {
+//     this.onResolve = onFullfilled;
+//     if (!this.called && this.state === "fullfilled") {
+//       console.log("Called from then bloc");
+//       this.onResolve(this.value);
+//       this.called = true;
+//     }
+//     return this;
+//   }
+//   catch(onReject) {
+//     this.onReject = onReject;
+//     if (!this.called && this.state === "rejected") {
+//       this.onReject(this.value);
+//       this.called = true;
+//     }
+//     return this;
+//   }
+// }
+
+class PromiseV4 {
+  constructor(executer) {
+    this.value = null;
+    this.rejReason = null;
     this.state = "pending";
     this.called = false;
+    this.onResolve = null;
+    this.onReject = null;
     this.resolve = this.resolve.bind(this);
     this.reject = this.reject.bind(this);
     try {
-      console.log("constructor hit");
-      executor(this.resolve, this.reject);
+      executer(this.resolve, this.reject);
     } catch (err) {
-      console.log("Error from constructor", err);
+      console.log("constructor error!!");
     }
   }
   resolve(value) {
     if (this.state !== "pending") return;
-    this.value = value;
     this.state = "fullfilled";
-    if (typeof this.onResolve === "function" && !this.called) {
+    this.value = value;
+    console.log("inside resolve this.onResolve", this.onResolve);
+    if (!this.called && typeof this.onResolve === "function") {
       this.onResolve(this.value);
       this.called = true;
     }
   }
-  reject(value) {
+  reject(reason) {
     if (this.state !== "pending") return;
-    this.value = value;
     this.state = "rejected";
+    this.rejectReason = reason;
     if (!this.called && typeof this.onReject === "function") {
-      this.onReject(this.value);
+      this.onReject(this.rejectReason);
       this.called = true;
     }
   }
-  then(onFullfilled) {
-    this.onResolve = onFullfilled;
+  then(callback) {
+    this.onResolve = callback;
+    console.log("inside then", this.state);
     if (!this.called && this.state === "fullfilled") {
-      console.log("Called from then bloc");
       this.onResolve(this.value);
       this.called = true;
     }
     return this;
   }
-  catch(onReject) {
-    this.onReject = onReject;
+  catch(callback) {
+    this.onReject = callback;
     if (!this.called && this.state === "rejected") {
-      this.onReject(this.value);
+      this.onReject(this.rejectReason);
       this.called = true;
     }
     return this;
   }
 }
 
+PromiseV4.race = function (iterable) {
+  return new Promise((res, rej) => {
+    if (iterable.length === 0) return;
+    iterable.forEach(async (p) => {
+      try {
+        const res = await p;
+        res(p);
+      } catch (err) {
+        rej(err);
+      }
+    });
+  });
+};
+
 async function promiseV3Utility() {
-  console.log("hit");
-  const p1 = () =>
-    new PromiseV3((res, rej) =>
-      setTimeout(() => res("Post submitted!!!"), 1000)
-    );
+  console.log("promiseV3Utility hit");
+  // const p1 = () =>
+  //   new PromiseV3((res, rej) =>
+  //     setTimeout(() => res("Post submitted!!!"), 1000)
+  //   );
 
-  const p2 = () => new PromiseV3((res, rej) => res("Post translated"));
+  const p2 = () => new PromiseV4((res, rej) => res("Post translated"));
 
-  const p3 = () =>
-    new PromiseV3((res, rej) => setTimeout(rej("Server error!!!")));
+  // const p3 = () =>
+  //   new PromiseV3((res, rej) => setTimeout(rej("Server error!!!")));
 
-  const p4 = () =>
-    new PromiseV3((res, rej) => rej("Server internal execution error"));
+  // const p4 = () =>
+  //   new PromiseV3((res, rej) => rej("Server internal execution error"));
 
-  const res1 = await p1();
-  console.log("res1", res1);
+  // const res1 = await p1();
+  // console.log("res1", res1);
   const res2 = await p2();
   console.log("res2", res2);
-  const res3 = await p3();
-  console.log("res3", res3);
-  const res4 = await p4();
-  console.log("res4", res4);
+  // const res3 = await p3();
+  // console.log("res3", res3);
+  // const res4 = await p4();
+  // console.log("res4", res4);
 }
 
 // const p1 = new PromiseV2((resolve, reject)=>resolve(26));

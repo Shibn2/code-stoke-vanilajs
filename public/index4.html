@@ -4,11 +4,144 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
+    <style>
+      .tab {
+        padding: 10px 20px;
+        cursor: pointer;
+        display: inline-block;
+        background: lightgray;
+        margin-right: 5px;
+        border-radius: 5px;
+      }
+      .tab.active {
+        background: skyblue;
+        color: white;
+      }
+      .content {
+        display: none;
+        padding: 20px;
+        margin-top: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+      }
+      .content.active {
+        display: block;
+      }
+    </style>
+    <style>
+      .chess-board {
+        width: 80%;
+        margin: 30px auto 10px auto;
+        
+      }
+      .board-container {
+        display: flex;
+        flex-direction: column;
+        flex-grow: 1;
+        width: min(90vw, 100vh - 160px);
+        height: min(90vw, 100vh - 160px);
+      }
+      .row {
+        display: flex;
+        width: 100%;
+        height: 100%;
+      }
+      .cell {
+        /* width: 100px; */
+        /* height: 100px; */
+        flex-grow: 1;
+      }
+      .cell.white {
+        background-color: white;
+        border-color: white;
+      }
+      .cell.black {
+        background-color: black;
+        border-color: black;
+      }
+      .cell.selected {
+        background-color: red;
+        border-color: red;
+      }
+    </style>
+    <style>
+      .todo-list {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 5px;
+      }
+      .todo-item {
+        max-width: 250px;
+        flex: 1 1 200px;
+        display: flex;
+        flex-direction: column;
+      }
+      .todo-user {
+        
+      }
+      .todo-card {
+        display: flex;
+        flex-direction: column;
+        border: 1px solid grey;
+        border-radius: 5px;
+        padding: 10px;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      }
+      .todo-card>div:nth-child(2){
+        padding: 1px 2px;
+        color: white;
+      }
+      .fetch-btn:hover {
+        transform: translateY(-5px);
+      }
+    </style>
+    <style>
+      .todo-vanila {
+        display: flex;
+        width: 80%;
+        margin: 10px auto;
+      }
+      
+    </style>
+    </head>
   </head>
   <body>
-    <h3>LRU Cache</h3>
-    <input id="search-input" type="text" placeholder="enter the text" />
-    <button id="submit-btn">Get data</button>
-    <p id="search-result"></p>
+    <header>
+      <!-- <button class="tab" data-tab="1">LRU Cache</button>
+      <button class="tab" data-tab="2">Chess Board</button> -->
+    </header>
+    
+    <!-- <section class="content" data-content="1">
+      <h3>LRU Cache</h3>
+      <input id="search-input" type="text" placeholder="enter the text" />
+      <button id="submit-btn">Get data</button>
+      <p id="search-result"></p>
+    </section>
+    <section class="content chess-board" id="chess-board" data-content="2">
+      <div class="board-container" id="board-container"></div>
+    </section> -->
+    <!-- <script>
+      function handleBtnClick(e, tab, tabList, contentList) {
+        // Clear active from all the tabs and contents
+        tabList.forEach((tab) => tab.classList.remove("active"));
+        contentList.forEach((content) => content.classList.remove("active"));
+        tab.classList.add("active");
+        const targetContent = document.querySelector(
+          `[data-content="${tab.dataset.tab}"]`
+        );
+        targetContent.classList.add("active");
+      }
+
+      const tabList = document.querySelectorAll(".tab");
+      const contentList = document.querySelectorAll(".content");
+      console.log("tabList============>", tabList);
+      //Atach event listener
+
+      tabList.forEach((tab) => {
+        const tabData = tab.addEventListener("click", (e) =>
+          handleBtnClick(e, tab, tabList, contentList)
+        );
+      });
+    </script> -->
   </body>
 </html>

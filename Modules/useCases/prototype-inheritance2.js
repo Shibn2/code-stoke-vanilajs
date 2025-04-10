@@ -19,6 +19,7 @@ Vehicle.prototype.displayDetails = function () {
 
 function prototypeFunctionExample() {
   const veh = new Vehicle("Tata", "red", 4);
+  console.log("0", typeof veh);
   console.log("1 ", veh.hasOwnProperty("brand"));
   console.log("2", veh.hasOwnProperty("displayDetails"));
   console.log("3", veh);
@@ -34,10 +35,10 @@ function prototypeFunctionExample() {
 
   console.dir(Bike);
   const b = new Bike(2);
-  console.log("4 ", b);
+  console.log("5 ", b);
 
-  console.log("5", b.hasOwnProperty("brand"));
-  console.log("6", b.hasOwnProperty("displayDetails"));
+  console.log("6", b.hasOwnProperty("brand"));
+  console.log("7", b.hasOwnProperty("displayDetails"));
 }
 
 //---------------------------------------------//

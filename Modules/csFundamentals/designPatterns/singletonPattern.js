@@ -29,6 +29,26 @@ class SingletonePatter {
   }
 }
 
+// Version 3
+
+let instancev3 = null;
+
+class Singleton2 {
+  static count = 0;
+  // constructor() {
+  //   if (!instancev3) {
+  //     instancev3 = this;
+  //   }
+  //   return instancev3;
+  // }
+  increment() {
+    Singleton2.count++;
+  }
+  getCount() {
+    return Singleton2.count;
+  }
+}
+
 // Using a regular js object this can be achieved.
 let count = 0;
 const counter = {

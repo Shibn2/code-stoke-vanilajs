@@ -3,9 +3,9 @@ function round1UtilityFile2() {
   // (function immediate() {
   //   if (count === 0) {
   //     let count = 1;
-  //     console.log('1',count); // What is logged?
+  //     console.log("1", count); // What is logged?
   //   }
-  //   console.log('2',count); // What is logged?
+  //   console.log("2", count); // What is logged?
   // })();
   // //-------------------------------//
   // for (var i = 0; i < 3; i++) {
@@ -16,20 +16,20 @@ function round1UtilityFile2() {
   // work arounds
   // for (let i = 0; i < 3; i++) {
   //   setTimeout(() => {
-  //     console.log(i); // Logs 0, 1, 2
+  //     console.log(i); // What is loged?
   //   }, 1000);
   // }
   // for (var i = 0; i < 3; i++) {
   //   (function (i) {
   //     setTimeout(() => {
-  //       console.log(i); // Logs 0, 1, 2
+  //       console.log(i); // What is loged?
   //     }, 1000);
   //   })(i);
   // }
   // for (var i = 0; i < 3; i++) {
   //   setTimeout(
   //     (i) => {
-  //       console.log(i); // Logs 0, 1, 2
+  //       console.log(i); // What is loged?
   //     },
   //     1000,
   //     i
@@ -39,7 +39,7 @@ function round1UtilityFile2() {
   //   {
   //     let j = i;
   //     setTimeout(() => {
-  //       console.log(j); // Logs 0, 1, 2
+  //       console.log(j); // What is loged?
   //     }, 1000);
   //   }
   // }
@@ -73,27 +73,27 @@ function round1UtilityFile2() {
   // var status = "v";
   // function outer() {
   //   var status = "u";
-  //   console.log("1", this.status); // 1w
+  //   console.log("1", this.status); //
   //   function test() {
-  //     console.log("2", this.status, status); // 2wundefined
+  //     console.log("2", this.status, status);
   //     var status = "y";
-  //     console.log("3", status); //3y
+  //     console.log("3", status); //
   //     const data = {
   //       status: "z",
   //       getStatus: () => {
   //         return this.status;
-  //       }
+  //       },
   //     };
-  //     console.log("4", data.getStatus()); // 4w
-  //     console.log("5", data.getStatus.call(this)); // 5w
+  //     console.log("4", data.getStatus()); //
+  //     console.log("5", data.getStatus.call(this)); //
   //   }
   //   test.call(this);
   // }
   // const obj1 = {
-  //   status: "w"
+  //   status: "w",
   // };
   // outer.call(obj1);
-  // console.log("6-", status); // v
+  // console.log("6-", status); //
   //------------------------------------------------------//
   // const a1 = [1,2,3,4];
   // for(let item in a1){
@@ -108,17 +108,25 @@ function round1UtilityFile2() {
   //     },
   //     pop() {
   //       return items.pop();
-  //     }
+  //     },
+  //     displayItems: function () {
+  //       console.log("this.item", this.items);
+  //     },
+  //     displayLocalItem: function () {
+  //       console.log("Local items", items);
+  //     },
   //   };
   // }
   // const stack = createStack();
   // stack.push(555);
   // stack.push(5555);
-  // stack.pop(); // => 5
-  // stack.items; // =>  [10]
+  // stack.pop(); //
+  // stack.items; //
   // stack.items = [10, 100, 1000];
   // console.dir(stack);
-  // console.log('stack', stack.items);
+  // console.log("stack", stack.items);
+  // console.log("displayItems", stack.displayItems());
+  // console.log("displayLocalItem", stack.displayLocalItem());
   // console.log(stack.pop());
   //---------------------------------------//
   // const arr = [10,12,15,21];
@@ -179,14 +187,14 @@ function round1UtilityFile2() {
   // function foo(){
   //   let a = b = 5;
   //   a++;
-  //   console.log('1',a)//16
+  //   console.log('1',a)//
   //   return a;
   // }
   // let obj = {
   //   b: 100
   // }
   // foo.call(obj);
-  // console.log('2 ',typeof a); //2
+  // console.log('2 ',typeof a); //
   // console.log('3',typeof b);
   // console.log('4', this.b);
   //-------------------------------//
@@ -203,41 +211,45 @@ function round1UtilityFile2() {
   // -------------------------------- //
   // let i;
   // //console.log('1',aaa);
-  // function test(){
+  // function test() {
   //   const q = 0;
-  //   console.log('2',aaa);
-  //   for(var aaa=0;aaa<=5;aaa++){
+  //   console.log("2", aaa);
+  //   for (var aaa = 0; aaa <= 5; aaa++) {
   //     const x = 9;
-  //     const log = ()=>{
+  //     const log = () => {
   //       console.dir(log);
-  //       console.log('3', aaa, this);
-  //     }
+  //       console.log("3", aaa, this);
+  //     };
   //     bbb = 555;
-  //     setTimeout(()=>{ aaa = 900}, 500);
+  //     setTimeout(() => {
+  //       aaa = 900;
+  //     }, 500);
   //     // const bindFunc = log.bind(this);
   //     setTimeout(log, 1000);
   //   }
-  //   console.log('4',aaa);
+  //   console.log("4", aaa);
   // }
-  // setTimeout(()=>{bbbb=900}, 500);
+  // setTimeout(() => {
+  //   bbbb = 900;
+  // }, 500);
   // ccc = 9876;
   // //var aaa = 999;
   // //setTimeout(console.log('4', aaa), 2000);
   // let obj = {
-  //   aaa: 666
-  // }
+  //   aaa: 666,
+  // };
   // //test.call(obj);
-  // test()
+  // test();
   //------------------------------- //
-  // console.log('1', myVar); // und
-  // console.log('2', myConst); // und
+  // console.log("1", myVar); //
+  // console.log("2", myConst); //
   // var myVar = 10;
   // var myConst = 20;
-  // function outerFun(){
+  // function outerFun() {
   //   var myVar = 33;
-  //   console.log('3', myVar); // 33
-  //   (()=>{
-  //     console.log('4 ', this.myVar); // 33
+  //   console.log("3", myVar); //
+  //   (() => {
+  //     console.log("4 ", this.myVar); //
   //   })();
   // }
   // outerFun();
@@ -252,13 +264,17 @@ function round1UtilityFile2() {
   //   const a = () => {
   //     console.log("2", this.a);
   //   };
+  //   function b() {
+  //     console.log("3", this, this.a);
+  //   }
   //   // function x() {
   //   //   console.log("3", this, this.a);
   //   // }
   //   // x();
   //   a();
+  //   b();
   // }
-  // test();
+  // // test();
   // test.call(obj1);
   //----------------------//
   // console.log("1", x);
@@ -291,70 +307,73 @@ function round1UtilityFile2() {
   // outerFn();
   //-------------------------//
   // greeting();
-  // function greeting(x){
-  //   console.log('1', x);
+  // function greeting(x) {
+  //   console.log("1", x);
   // }
   // greeting();
-  // function greeting(x1, x2){
-  //   console.log('2', x1, x2);
+  // function greeting(x1, x2) {
+  //   console.log("2", x1, x2);
   // }
   // greeting();
-  // var greeting = function(a){
-  //   console.log('3', a);
-  // }
-  // greeting('shibin')
+  // var greeting = function (a) {
+  //   console.log("3", a);
+  // };
+  // greeting("shibin");
   //-----------------------------//
   // var variable = 10;
-  // (()=>{
-  //   console.log('1', variable);
+  // (() => {
+  //   console.log("1", variable);
   //   var variable = 20;
-  //   console.log('2', variable);
-  // })()
-  // console.log('3', variable);
+  //   console.log("2", variable);
+  // })();
+  // console.log("3", variable);
   // var variable = 30;
-  // console.log('4', variable)
+  // console.log("4", variable);
   //----------------------------//
-  // function a(){
-  //   var avar = '111';
-  //   b();
+  // function testFunA() {
+  //   var avar = "111";
+  //   testFunB();
   // }
-  // function b(){
+  // function testFunB() {
+  //   dvar = 900;
   //   cvar = 90;
   //   var cvar;
-  //   var bvar = '222 ';
-  //   console.log('1', avar);
-  //   (()=>{
-  //     bvar = 'insideb 2 '
+  //   var bvar = "222 ";
+  //   console.log("1", avar); //
+  //   (() => {
+  //     bvar = "insideb 2 ";
   //   })();
-  //   bvar = '888';
-  //   (function(){
-  //     console.log('2',this, bvar);
-  //   })()
-  //   function x(){
-  //     console.log('6', bvar);
+  //   console.log("7", bvar);
+  //   bvar = "888";
+  //   (function () {
+  //     console.log("2", this, bvar); //
+  //   })();
+  //   function x() {
+  //     console.log("6", bvar); //
   //   }
   //   x();
-  //   console.log('5',cvar);
+  //   console.log("5", cvar); //
   // }
-  // var avar = '333';
-  // var bvar = '444';
-  // a();
-  // console.log('3 ', bvar);
-  // console.log('4', cvar);
+  // var avar = "333";
+  // var bvar = "444";
+  // testFunA();
+  // console.log("3 ", bvar); //
+  // console.log("4", cvar); //
+  // console.log("8", dvar);
   //-----------------------------------------//
   // var variable = 10;
-  // function test(){
-  //   (()=>{
+  // function test() {
+  //   (() => {
   //     variable_35 = 35;
-  //     console.log('1 ', variable_35);
+  //     console.log("1 ", variable_35); //1 35
   //     var variable_35 = 45;
   //     variable_2 = 15;
-  //     console.log('2 ', variable);
+  //     console.log("2 ", variable); //2 10
   //   })();
   // }
   // test();
-  // console.log('3',variable_2);
-  // console.log('4', variable_35);
+  // console.log("3", variable_2); // 3
+  // console.log("4", variable_35); // reference error not defined
   // var variable = 30;
   //------------------------//
   // for (var i = 0; i < 5; i++) {
@@ -365,15 +384,15 @@ function round1UtilityFile2() {
   //   })(i);
   // }
   //------------------//
-  // function prod(a,b){
-  //   if(a && b){
-  //     return a*b;
+  // function prod(a, b) {
+  //   if (a && b) {
+  //     return a * b;
   //   }
-  //   return function(sec){
-  //     return a*sec;
-  //   }
+  //   return function (sec) {
+  //     return a * sec;
+  //   };
   // }
-  // console.log(prod(5,4), prod(5)(4))
+  // console.log(prod(5, 4), prod(5)(4));
   //----------------------------------//
   // class Dog {
   //   constructor() {
@@ -386,17 +405,17 @@ function round1UtilityFile2() {
   // const ndog = new Dog();
   // console.log(ndog.talk);
   // setTimeout(ndog.talk, 1000);
-  // let str = 'aaa';
-  // if(Number(str) !== NaN){
-  //   console.log('Not a number')
+  // let str = "aaa";
+  // if (Number(str) !== NaN) {
+  //   console.log("Not a number");
   // }
   // functionA();
-  // function functionA(){
-  //   console.log('function A');
+  // function functionA() {
+  //   console.log("function A");
   //   functionB();
   // }
-  // function functionB(){
-  //   console.log('function B.')
+  // function functionB() {
+  //   console.log("function B.");
   // }
   // let globalThis;
   // console.log("globalThis", globalThis);

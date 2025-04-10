@@ -31,6 +31,7 @@ module.exports = {
     static: {
       directory: path.resolve(__dirname, "dist"),
     },
+    host: "0.0.0.0",
     port: 3001,
     hot: true,
     open: true,

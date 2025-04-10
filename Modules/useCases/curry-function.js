@@ -19,16 +19,20 @@ function curry(fn) {
 //   return innerFn(n, []);
 // }
 
-function curryN(fn) {
-  const argLength = fn.length;
-  return function curriedfn(arg, args = []) {
-    console.log("arg", arg, "args", args);
-    if (argLength - 1 === args.length) {
-      return fn.apply(this, [...args, arg]);
+function curryN(callback) {
+  const totalCbArgs = callback.length;
+
+  return function innerCallback(arg, argList = []) {
+    const isLastExec = totalCbArgs - 1 === argList.length;
+
+    if (isLastExec) {
+      return callback.apply(this, [...argList, arg]);
     }
-    return (newArg) => curriedfn(newArg, [...args, arg]); // 2, [1] | 3, [2, 1] | 4, [3, 2, 1] | 5, [4, 3, 2, 1]
+
+    return (arg2) => innerCallback(arg2, [...argList, arg]);
   };
 }
+// curriedDisplayFive(1)(2)(3)(4)(5); // a 1 b 2 c 3 d 4 e 5
 
 // curry function with two varibles
 function curryExampleWith2Params() {
@@ -45,7 +49,7 @@ function curryExampleWithNParams() {
 
   // const curriedShow = curryN(showVars);
 
-  // //   console.log("curriedSum with n values: 3, ", curriedShow(1)(2)(3)); // 6
+  // console.log("curriedSum with n values: 3, ", curriedShow(1)(2)(3)); // 6
   // console.log("curriedSum with n values: 4, ", curriedShow(1)(2)(3)(4)); // 10
   const displayFiveValues = (a, b, c, d, e) =>
     console.log("a", a, "b", b, "c", c, "d", d, "e", e);

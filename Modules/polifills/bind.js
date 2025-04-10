@@ -1,12 +1,22 @@
-Function.prototype.bindv2 = function (context) {
-  console.log("custom bind method called!", context);
-  var fn = this;
-  const newContext = {
-    ...context,
-    fn,
-  };
+// Function.prototype.bindv2 = function (context) {
+//   console.log("custom bind method called!", context);
+//   var fn = this;
+//   const newContext = {
+//     ...context,
+//     fn,
+//   };
+//   return function () {
+//     return newContext.fn(...arguments);
+//   };
+// };
+
+Function.prototype.bindV3 = function (context) {
+  const callback = this;
+  const key = Symbol();
+  context[key] = callback;
+
   return function () {
-    return newContext.fn(...arguments);
+    context[key](...arguments);
   };
 };
 
@@ -20,13 +30,13 @@ function bindSample() {
     age: 25,
   };
 
-  function printName(auth) {
-    console.log("printName method by", auth);
+  function printName(val) {
+    console.log("printName method by", val);
   }
 
-  const bindedFn = printName.bindv2(person);
+  const bindedFn = printName.bindV3(person);
   bindedFn("Shibin"); // printName method John
-  const bindedFn2 = printName.bindv2(person2);
+  const bindedFn2 = printName.bindV3(person2);
   bindedFn2("Lal"); // printName method John
 }
 
